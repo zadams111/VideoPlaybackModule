@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Video Viewer</h1>
+        <h1 class="text-center">Content Viewer</h1>
 
         <form id="uploadForm" class="mt-4">
             <div class="form-group">
@@ -24,7 +24,25 @@
             
 
         </form> 
-        <div id="content-container" ></div>
+        <div id="content-container" controls>
+            <div class="video-controls-container">
+                <div class="timeline-container"></div>
+                <div class="controls">
+                    <div class="play-pause-btn">Play</div>
+                </div>
+            </div>
+
+        </div>
+        <style>
+            /* Hide default controls */
+            video::-webkit-media-controls {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            video {
+                pointer-events: none; /* Prevent interactions with the video */
+            }
+        </style>
     </div>
 
 
