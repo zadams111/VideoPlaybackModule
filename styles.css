@@ -4,6 +4,11 @@
 
 body {
     margin: 0;
+    background-color: #212121; /* Change this to your desired background color */
+    color: #c9c9c9; /* Change this to your desired text color */
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+    font-family: Arial, sans-serif; /* Change font if desired */
 }
 
 

@@ -1,23 +1,18 @@
 // Get the document elements
 const fileInput = document.getElementById("fileInput");
+
 const uploadButton = document.getElementById("uploadButton");
-
-
-
 const playPauseButton = document.querySelector(".play-pause-btn");
 
 
 
-
-
-
-
+//play the video
 function togglePlay(){
     const video = document.querySelector('video');
     video.paused? video.play() : video.pause()
 }
 
-
+//upload content
 function upload(event) {
   event.preventDefault();
 
@@ -58,3 +53,13 @@ function upload(event) {
 uploadButton.addEventListener("click", upload);
 
 playPauseButton.addEventListener('click', togglePlay);
+
+//keyboard shorcuts
+document.addEventListener("keydown", e => {
+  switch (e.key.toLowerCase()){
+    case 'k':
+    case ' ':
+      togglePlay();
+      break;
+  }
+})
