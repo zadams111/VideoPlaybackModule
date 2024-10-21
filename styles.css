@@ -7,7 +7,7 @@ body {
 }
 
 
-.content-container{
+.content-view{
     position: relative;
     width: 90%;
     max-width: 1000px;
@@ -23,9 +23,10 @@ video {
 }
 
 .video-controls-container{
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
-    color: white;
+    color: black;
+    z-index: 100;
 }
