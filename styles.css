@@ -37,6 +37,13 @@
 }
 
 
+
+.timeline-range{
+    padding: 10px 0;
+    min-width: 1080px;
+}
+
+
 video {
     width: 100%;
     max-height: 70vh

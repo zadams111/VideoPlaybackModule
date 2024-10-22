@@ -3,12 +3,12 @@ const fileInput = document.getElementById("fileInput");
 const uploadButton = document.getElementById("uploadButton");
 const playPauseButton = document.querySelector(".play-pause-btn");
 const contentView = document.getElementById("content-container");
-
+const timeline = document.getElementById("videoTimeline");
+let video; // Declare video variable
 
 // Play the video
 function togglePlay() {
-    const video = document.querySelector('video'); // Always get the latest video element
-    if (video) {
+    if (video) { // Use the video variable
         video.paused ? video.play() : video.pause();
     }
 }
@@ -28,8 +28,7 @@ function upload(event) {
 
         // Read the file as a data URL
         reader.onload = function (e) {
-            const resultDiv = document.getElementById("content-container");
-            resultDiv.innerHTML = ""; // Clear the previous content
+            contentView.innerHTML = ""; // Clear the previous content
 
             // Check if the file is an image or a video
             if (file.type.startsWith("image/")) {
@@ -37,14 +36,22 @@ function upload(event) {
                 const img = document.createElement("img");
                 img.src = e.target.result;
                 img.style.maxWidth = "100%"; // Optional styling
-                resultDiv.appendChild(img);
+                contentView.appendChild(img);
             } else if (file.type.startsWith("video/")) {
                 // Create a video element for video files
-                const video = document.createElement("video");
+                video = document.createElement("video"); // Assign to the global variable
                 video.src = e.target.result;
                 video.controls = true; // Add controls for playback
                 video.style.maxWidth = "100%"; // Optional styling
-                resultDiv.appendChild(video);
+                contentView.appendChild(video);
+
+                // Update timeline when the video's metadata is loaded
+                video.addEventListener('loadedmetadata', function() {
+                    timeline.max = video.duration; // Set the max value of the timeline to video duration
+                });
+
+                // Update the timeline as the video plays
+                video.addEventListener('timeupdate', updateTimeline);
             }
         };
 
@@ -53,11 +60,16 @@ function upload(event) {
     }
 }
 
-//move the frame by a selected frame count
+function updateTimeline() {
+    if (video) {
+        timeline.value = video.currentTime; // Update timeline value to current time
+    }
+}
+
+// Move the frame by a selected frame count
 function moveFrame(frameCount) {
     const frameRate = 60; // Adjust frame rate if needed
     const secondsPerFrame = 1 / frameRate;
-    const video = document.querySelector('video'); // Always get the latest video element
 
     if (video) {
         const newTime = video.currentTime + (frameCount * secondsPerFrame);
@@ -67,6 +79,13 @@ function moveFrame(frameCount) {
 
 // Add event listener for the play/pause button
 playPauseButton.addEventListener('click', togglePlay);
+
+// Seek video to slider value when input changes
+timeline.addEventListener('input', function() {
+    if (video) {
+        video.currentTime = this.value; // Seek video to slider value
+    }
+});
 
 // Keyboard shortcuts
 document.addEventListener("keydown", e => {

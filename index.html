@@ -23,6 +23,7 @@
 
         </form> 
 
+
         <div class="content-pane">
             <div class="content-view" id="content-container"></div>
         </div>
@@ -31,12 +32,15 @@
         
 
         <div class="video-controls-container">
-            <div class="timeline-container"></div>
+            <div class="timeline-container">
+                <input type="range" id="videoTimeline" class="form-range" value="0" min="0" max="100" step="0.1" />
+            </div>
+            
             <div class="controls">
                 <button class="play-pause-btn">Play</button>
                 <input id="speedRange" type="range" class="form-range d-inline-block" min="0.1" max="2" step="0.1" value="1" style="width: 120px;">
                 <button lcass="speed-btn wide-button">1x</button>
-                <div>
+            <div>
             
         </div>
         <style>
