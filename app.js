@@ -2,6 +2,8 @@
 const fileInput = document.getElementById("fileInput");
 const uploadButton = document.getElementById("uploadButton");
 const playPauseButton = document.querySelector(".play-pause-btn");
+const contentView = document.getElementById("content-container");
+
 
 // Play the video
 function togglePlay() {
@@ -51,6 +53,7 @@ function upload(event) {
     }
 }
 
+//move the frame by a selected frame count
 function moveFrame(frameCount) {
     const frameRate = 60; // Adjust frame rate if needed
     const secondsPerFrame = 1 / frameRate;

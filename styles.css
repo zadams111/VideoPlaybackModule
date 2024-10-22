@@ -2,16 +2,23 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    /*background-color: #212121; /* Change this to your desired background color */
-    /*color: #c9c9c9; /* Change this to your desired text color */
-    margin: 0; /* Reset margin */
-    padding: 0; /* Reset padding */
-    font-family: Arial, sans-serif; /* Change font if desired */
+
+.content-pane{
+    width: 1080px;
+    height: 720px;
+    position: relative;
+    background-color: rgb(32, 32, 32);
+    display: flex;
+    justify-content: center;
 }
 
-
+/* Video and images should not exceed the content pane's size */
+.content-pane img,
+.content-pane video {
+    max-width: 100%; /* Prevent media from exceeding the pane’s width */
+    max-height: 100%; /* Prevent media from exceeding the pane’s height */
+    display: block; /* Ensure media doesn’t have any extra space around */
+}
 
 
 .form-control-file{
@@ -26,6 +33,7 @@ body {
     display: flex;
     justify-content: center;
     margin-inline: auto;
+    margin: 0;
 }
 
 
