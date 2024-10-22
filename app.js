@@ -5,13 +5,18 @@ const playPauseButton = document.querySelector(".play-pause-btn");
 
 // Play the video
 function togglePlay() {
-    const video = document.querySelector('video');
-    video.paused ? video.play() : video.pause();
+    const video = document.querySelector('video'); // Always get the latest video element
+    if (video) {
+        video.paused ? video.play() : video.pause();
+    }
 }
+
+// Properly attach the 'upload' function to the 'onchange' event
+fileInput.onchange = upload;
 
 // Upload content
 function upload(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default behavior
 
     // Get the selected file
     const file = fileInput.files[0];
@@ -49,14 +54,15 @@ function upload(event) {
 function moveFrame(frameCount) {
     const frameRate = 60; // Adjust frame rate if needed
     const secondsPerFrame = 1 / frameRate;
-    const video = document.querySelector('video');
+    const video = document.querySelector('video'); // Always get the latest video element
 
-    const newTime = video.currentTime + (frameCount * secondsPerFrame);
-    video.currentTime = Math.max(0, Math.min(video.duration, newTime));
+    if (video) {
+        const newTime = video.currentTime + (frameCount * secondsPerFrame);
+        video.currentTime = Math.max(0, Math.min(video.duration, newTime));
+    }
 }
 
-// Add event listener for the upload button
-uploadButton.addEventListener("click", upload);
+// Add event listener for the play/pause button
 playPauseButton.addEventListener('click', togglePlay);
 
 // Keyboard shortcuts
@@ -65,18 +71,18 @@ document.addEventListener("keydown", e => {
         case 'k':
         case ' ':
             togglePlay();
-            break; // Added break
+            break;
         case ',':
             moveFrame(-1);
-            break; // Added break
+            break;
         case '.':
             moveFrame(1);
-            break; // Added break
+            break;
         case 'j':
             moveFrame(-10);
-            break; // Added break
+            break;
         case 'l':
-          moveFrame(10);
-            break; // Added break
+            moveFrame(10);
+            break;
     }
 });
